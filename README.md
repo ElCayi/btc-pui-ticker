@@ -73,4 +73,4 @@ Los artefactos compilados se pueden descargar desde la pestaña "Actions" de Git
 Este proyecto está bajo la Licencia MIT. Siéntete libre de usarlo y modificarlo.
 
 ---
-Desarrollado con ❤️ por [ElCayi](https://github.com/ElCayi)
+Desarrollado por [ElCayi](https://github.com/ElCayi)
