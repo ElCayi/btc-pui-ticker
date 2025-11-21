@@ -25,7 +25,8 @@ jobs:
       - name: Compilar EXE
         # Añadido --collect-all PyQt5 para asegurar que incluye los plugins de Qt
         # Añadido --add-data para incluir la imagen (separador ; en Windows)
-        run: pyinstaller --noconsole --onefile --name="btc-pui-ticker" --collect-all PyQt5 --add-data "btc-pui.png;." main.py
+        # Añadido --icon para el icono y --version-file para metadatos (reduce falsos positivos)
+        run: pyinstaller --noconsole --onefile --name="btc-pui-ticker" --collect-all PyQt5 --add-data "btc-pui.png;." --icon "icon.ico" --version-file "version_info.txt" main.py
 
       - name: Subir Artefacto Windows
         uses: actions/upload-artifact@v4
@@ -52,7 +53,8 @@ jobs:
       - name: Compilar Mac App
         # --windowed es necesario en Mac para crear el .app
         # Añadido --add-data para incluir la imagen (separador : en Mac/Linux)
-        run: pyinstaller --windowed --onefile --name="btc-pui-ticker" --collect-all PyQt5 --add-data "btc-pui.png:." main.py
+        # Añadido --icon para el icono de la aplicación
+        run: pyinstaller --windowed --onefile --name="btc-pui-ticker" --collect-all PyQt5 --add-data "btc-pui.png:." --icon "icon.icns" main.py
 
       - name: Comprimir .app
         run: |
