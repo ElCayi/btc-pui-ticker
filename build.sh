@@ -12,7 +12,8 @@ rm -rf build/ dist/ *.spec
 # --noconsole: No muestra terminal al ejecutar
 # --onefile: Un solo ejecutable
 # --collect-all PyQt5: VITAL para que incluya todas las librerías gráficas dentro
-pyinstaller --noconsole --onefile --clean --name="$APP_NAME" --collect-all PyQt5 main.py
+# --add-data "btc-pui.png:.": Incluye la imagen en el ejecutable (formato origen:destino)
+pyinstaller --noconsole --onefile --clean --name="$APP_NAME" --collect-all PyQt5 --add-data "btc-pui.png:." main.py
 
 echo "✅ Compilación terminada."
 echo "📂 El ejecutable está en: dist/$APP_NAME"
