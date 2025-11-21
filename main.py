@@ -42,7 +42,7 @@ class PuiTicker(QWidget):
         self.close_button.setStyleSheet("background-color: rgba(0,0,0,100); color: white; border-radius: 10px;")
         self.close_button.resize(40, 40)
         self.close_button.move(10, 10)
-        self.close_button.clicked.connect(self.close)
+        self.close_button.clicked.connect(QApplication.instance().quit)
 
         # Timer para actualizar el precio cada 2 segundos
         self.timer = QTimer(self)
