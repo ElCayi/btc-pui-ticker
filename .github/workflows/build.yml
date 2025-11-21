@@ -2,7 +2,7 @@ name: Compilar btc-pui-ticker
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
   workflow_dispatch:
 
 jobs:
