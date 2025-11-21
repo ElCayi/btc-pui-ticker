@@ -24,7 +24,8 @@ jobs:
 
       - name: Compilar EXE
         # Añadido --collect-all PyQt5 para asegurar que incluye los plugins de Qt
-        run: pyinstaller --noconsole --onefile --name="btc-pui-ticker" --collect-all PyQt5 main.py
+        # Añadido --add-data para incluir la imagen (separador ; en Windows)
+        run: pyinstaller --noconsole --onefile --name="btc-pui-ticker" --collect-all PyQt5 --add-data "btc-pui.png;." main.py
 
       - name: Subir Artefacto Windows
         uses: actions/upload-artifact@v4
@@ -50,7 +51,8 @@ jobs:
 
       - name: Compilar Mac App
         # --windowed es necesario en Mac para crear el .app
-        run: pyinstaller --windowed --onefile --name="btc-pui-ticker" --collect-all PyQt5 main.py
+        # Añadido --add-data para incluir la imagen (separador : en Mac/Linux)
+        run: pyinstaller --windowed --onefile --name="btc-pui-ticker" --collect-all PyQt5 --add-data "btc-pui.png:." main.py
 
       - name: Comprimir .app
         run: |
@@ -62,34 +64,3 @@ jobs:
         with:
           name: btc-pui-ticker-Mac
           path: dist/btc-pui-ticker-Mac.tar.gz
-
-  # --- TRABAJO PARA LINUX (NUEVO) ---
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
-
-      # Linux necesita librerías de sistema para compilar Qt
-      - name: Instalar Dependencias del Sistema (Linux)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libgl1-mesa-glx libegl1-mesa libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
-
-      - name: Instalar Dependencias Python
-        run: |
-          pip install -r requirements.txt
-          pip install pyinstaller
-
-      - name: Compilar Linux App
-        run: pyinstaller --noconsole --onefile --name="btc-pui-ticker" --collect-all PyQt5 main.py
-
-      - name: Subir Artefacto Linux
-        uses: actions/upload-artifact@v4
-        with:
-          name: btc-pui-ticker-Linux
-          path: dist/btc-pui-ticker
